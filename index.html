@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+    <title>Heidi db password decode</title>
+</head>
+
+<body>
+    <center>
+        <h2>Encoded password</h2>
+        <br>
+        <textarea id="encoded-password" oninput="decode()" cols="50"></textarea>
+        <br><br><br>
+        <h2>Decoded password</h2>
+        <br>
+        <textarea id="decoded-password" disabled cols="50"></textarea>
+    </center>
+</body>
+<script>
+    function decode() {
+        const encodedPassword = document.getElementById("encoded-password").value;
+        const shift = parseInt(encodedPassword.substr(-1));
+        const hex = encodedPassword.substr(0, encodedPassword.length - 1);
+
+        let result = '';
+        for (let i = 0; i < hex.length; i += 2) {
+            result += String.fromCharCode(parseInt(hex.substr(i, 2), 16) - shift);
+        }
+
+        document.getElementById("decoded-password").value = result;
+    }
+</script>
+
+</html>
